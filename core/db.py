@@ -4,7 +4,7 @@ import os
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql+psycopg2://bothost_db_533a84aad48d:pRNapgnykVtsvFRMgc4D2_q-yytWSqJ1QXAgPQ0MF3E@node1.pghost.ru:15825/bothost_db_533a84aad48d"
+    "postgresql+asyncpg://bothost_db_533a84aad48d:pRNapgnykVtsvFRMgc4D2_q-yytWSqJ1QXAgPQ0MF3E@node1.pghost.ru:15825/bothost_db_533a84aad48d"
 )
 
 engine = create_async_engine(DATABASE_URL, echo=False)
