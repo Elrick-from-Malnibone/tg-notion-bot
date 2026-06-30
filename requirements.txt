@@ -3,3 +3,4 @@ sqlalchemy>=2.0
 aiosqlite>=0.19
 python-dotenv>=1.0
 asyncpg>=0.29
+psycopg2-binary>=2.9
