@@ -1,15 +1,20 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
-from core.config import DB_PATH
+import os
 
-engine = create_async_engine(f"sqlite+aiosqlite:///{DB_PATH}", echo=False)
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql+asyncpg://bothost_db_533a84aad48d:pRNapgnykVtsvFRMgc4D2_q-yytWSqJ1QXAgPQ0MF3E@node1.pghost.ru:15825/bothost_db_533a84aad48d"
+)
+
+engine = create_async_engine(DATABASE_URL, echo=False)
 async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 class Base(DeclarativeBase):
     pass
 
 async def init_db():
-    import models.models  # чтобы модели зарегистрировались
+    import models.models
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
